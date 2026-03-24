@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://d3caeh5bunde0"]
+
+[ext_resource type="Script" uid="uid://blhbvq754rvbv" path="res://scripts/load_song.gd" id="1_o5qli"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sgp6g"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_o5qli"]
+sky_material = SubResource("ProceduralSkyMaterial_sgp6g")
+
+[sub_resource type="Environment" id="Environment_0wfyh"]
+background_mode = 2
+sky = SubResource("Sky_o5qli")
+tonemap_mode = 2
+
+[sub_resource type="BoxMesh" id="BoxMesh_o5qli"]
+
+[node name="Node3D" type="Node3D" unique_id=1595048366]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=964130724]
+environment = SubResource("Environment_0wfyh")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=125013184]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1453656235]
+transform = Transform3D(1, 0, 0, 0, 0.90630776, 0.42261827, 0, -0.42261827, 0.90630776, 2.5, 5, 5)
+
+[node name="Load Song" type="Node" parent="." unique_id=986936705 node_paths=PackedStringArray("audio_stream")]
+script = ExtResource("1_o5qli")
+audio_stream = NodePath("../AudioStreamPlayer")
+mesh = SubResource("BoxMesh_o5qli")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=705571512]

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dwnvmr5hfef0o"
+path="res://.godot/imported/song.ogg-e0aed89f5af1799131838571a25fdbee.oggvorbisstr"
+
+[deps]
+
+source_file="res://songs/Demo 1/song.ogg"
+dest_files=["res://.godot/imported/song.ogg-e0aed89f5af1799131838571a25fdbee.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
