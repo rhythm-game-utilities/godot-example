@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SongResource" format=3 uid="uid://ohjruppdtson"]
+
+[ext_resource type="Script" uid="uid://ek5fax33q7qk" path="res://scripts/song_resource.gd" id="1_nobxh"]
+[ext_resource type="AudioStream" uid="uid://bi3udj2qoifba" path="res://songs/song.mp3" id="1_vytjb"]
+
+[resource]
+script = ExtResource("1_nobxh")
+audio_stream = ExtResource("1_vytjb")
+notes_path = "res://songs/notes.mid"
+metadata/_custom_type_script = "uid://ek5fax33q7qk"

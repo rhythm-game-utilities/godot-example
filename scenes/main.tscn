@@ -1,0 +1,125 @@
+[gd_scene format=3 uid="uid://d3caeh5bunde0"]
+
+[ext_resource type="PackedScene" uid="uid://dsp5aycxuvqvh" path="res://models/Track.glb" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://brne5ja1kyw2s" path="res://models/Hit Note (Green).glb" id="2_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://do3bsh2hk7eov" path="res://models/Hit Note (Red).glb" id="3_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://bokmpqgxi146o" path="res://models/Hit Note (Yellow).glb" id="4_tefeu"]
+[ext_resource type="Script" uid="uid://72p2emq6ehc4" path="res://scripts/load_song.gd" id="5_tbgi4"]
+[ext_resource type="Resource" uid="uid://ohjruppdtson" path="res://songs/song.tres" id="6_tefeu"]
+[ext_resource type="Script" uid="uid://1d2hkdn02mm" path="res://scripts/render_notes.gd" id="7_choun"]
+[ext_resource type="ArrayMesh" uid="uid://77xg6raroo5l" path="res://models/Note (Green).glb" id="8_ya4ey"]
+[ext_resource type="ArrayMesh" uid="uid://18byujunpu3j" path="res://models/Note (Red).glb" id="9_eb6dy"]
+[ext_resource type="ArrayMesh" uid="uid://racnuv786nc0" path="res://models/Note (Yellow).glb" id="10_trceg"]
+[ext_resource type="Script" uid="uid://dcecd56toas0g" path="res://scripts/render_beat_bars.gd" id="11_eb6dy"]
+[ext_resource type="ArrayMesh" uid="uid://b008pdd5qq2tc" path="res://models/Track Beat Bar.glb" id="12_trceg"]
+[ext_resource type="Script" uid="uid://do5d7nx1qj44e" path="res://scripts/handle_inputs.gd" id="13_trceg"]
+[ext_resource type="Script" uid="uid://elc2pmkasqjq" path="res://scripts/handle_score.gd" id="14_a8y0u"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sgp6g"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_o5qli"]
+sky_material = SubResource("ProceduralSkyMaterial_sgp6g")
+
+[sub_resource type="Environment" id="Environment_0wfyh"]
+background_mode = 2
+sky = SubResource("Sky_o5qli")
+
+[node name="Node3D" type="Node3D" unique_id=1326801583]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=162238136]
+environment = SubResource("Environment_0wfyh")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=889093443]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=772646699]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 10, 3.5)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2018011845]
+
+[node name="Track" parent="." unique_id=1283513283 instance=ExtResource("1_o5qli")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+
+[node name="Hit Note (Green)" parent="." unique_id=1316685483 instance=ExtResource("2_jyhfs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+
+[node name="Hit Note (Red)" parent="." unique_id=27463488 instance=ExtResource("3_tbgi4")]
+
+[node name="Hit Note (Yellow)" parent="." unique_id=1563722113 instance=ExtResource("4_tefeu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="Load Song" type="Node" parent="." unique_id=1676794336 node_paths=PackedStringArray("audio_stream_player")]
+script = ExtResource("5_tbgi4")
+audio_stream_player = NodePath("../AudioStreamPlayer")
+song = ExtResource("6_tefeu")
+
+[node name="Render Notes" type="Node" parent="." unique_id=1335434378 node_paths=PackedStringArray("audio_stream_player")]
+script = ExtResource("7_choun")
+note_green_mesh = ExtResource("8_ya4ey")
+note_red_mesh = ExtResource("9_eb6dy")
+note_yellow_mesh = ExtResource("10_trceg")
+audio_stream_player = NodePath("../AudioStreamPlayer")
+song = ExtResource("6_tefeu")
+
+[node name="Render Beat Bars" type="Node" parent="." unique_id=180069806 node_paths=PackedStringArray("audio_stream_player")]
+script = ExtResource("11_eb6dy")
+beat_bar_mesh = ExtResource("12_trceg")
+audio_stream_player = NodePath("../AudioStreamPlayer")
+song = ExtResource("6_tefeu")
+
+[node name="Handle Input" type="Node" parent="." unique_id=904131411 node_paths=PackedStringArray("audio_stream_player")]
+script = ExtResource("13_trceg")
+audio_stream_player = NodePath("../AudioStreamPlayer")
+song = ExtResource("6_tefeu")
+
+[node name="Handle Score" type="Node" parent="." unique_id=117866926 node_paths=PackedStringArray("score_label", "multiplier_label", "accuracy_label")]
+script = ExtResource("14_a8y0u")
+score_label = NodePath("../Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Label")
+multiplier_label = NodePath("../Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Label2")
+accuracy_label = NodePath("../Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Label3")
+
+[node name="Control" type="Control" parent="." unique_id=1625773290]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Control" unique_id=1407182152]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/MarginContainer" unique_id=2080228929]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/PanelContainer" unique_id=1777375309]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/PanelContainer/MarginContainer" unique_id=1608148693]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1217598661]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Score: 0"
+
+[node name="Label2" type="Label" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1582785994]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Multiplier: 1x"
+
+[node name="Label3" type="Label" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=929277131]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+
+[connection signal="note_hit" from="Handle Input" to="Handle Score" method="_on_handle_input_note_hit"]
+[connection signal="note_missed" from="Handle Input" to="Handle Score" method="_on_handle_input_note_missed"]
